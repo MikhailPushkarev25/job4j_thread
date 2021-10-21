@@ -23,15 +23,15 @@ public class SimpleBlockingQueue<T> {
             notifyAll();
     }
 
-    public synchronized T poll() {
+    public synchronized T poll() throws InterruptedException {
             while (queue.isEmpty()) {
-                try {
                     wait();
-                } catch (InterruptedException e) {
-                   e.printStackTrace();
-                }
             }
         return queue.poll();
+    }
+
+    public synchronized boolean isEmpty() {
+        return queue.isEmpty();
     }
 
 }

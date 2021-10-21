@@ -18,8 +18,12 @@ public class SimpleBlockingQueueTest {
         );
         Thread consumer = new Thread(
                 () -> {
-                    simpleBlockingQueue.poll();
-                    simpleBlockingQueue.poll();
+                    try {
+                        simpleBlockingQueue.poll();
+                        simpleBlockingQueue.poll();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
         );
 
